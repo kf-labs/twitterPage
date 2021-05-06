@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EmotionBot Settings</title>
+  <title>Twitter Emotions</title>
   <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600"
@@ -13,9 +13,6 @@
   <!-- Axios library for API calls -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-  <script src="https://cdn.livechatinc.com/accounts/accounts-sdk.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.livechat-static.com/design-system/styles.css" />
-
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
   </script>
@@ -24,30 +21,10 @@
 
 <body>
   <div class="grid-container">
-    <div class="livechat-authorization">
-      <div class="lc-form-group__label authorization">
-        Sing In to manage EmotionBot:
+        Put your text here:
       </div>
-      <!-- Sign in with LiveChat Button -->
-      <a href="" onclick="instance.openPopup()">
-        <div id="livechat-login-button" class="livechat-login-button"></div>
-      </a>
-    </div>
-
-    <div class="livechat-authorization-done">
-      <form id="livechat-authorization-done" style="display:none;">
-        <div
-          class="lc-form-group__label authorization authorization-done"
-        ></div>
-      </form>
-    </div>
-
-    <div>
-    <div class="lc-divider" />
-    </div>
 
     <div class="settings">
-      <h3 class="rsg--heading-14 rsg--heading3-17 rsg--sectionName-12" style="font-family:Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">Settings</h3>
       <form action="" class="lc-select" >
         <label for="display_mode">Choose detected emotion display mode:</label>
       <select name="display_mode" id="display_mode" class="lc-select">
@@ -66,124 +43,19 @@
           <option value="users">Clients</option>
           <option value="none">Silent Mode (for statistics)</option>
         </select>
+          <input id="textInput" type="text" name="msg" placeholder="Message" />
         <br><br>
-        <label for="threshold-input">Emotion detection threshold:</label>
-        <div class="lc-numeric-input" style="width:75px">
-          <input
-            type="number"
-            id="threshold-input"
-            labelText="Emotion detection threshold"
-            description="Choose probability 0.00-1.00"
-            value="0.80"
-            min="0.00"
-            max="1.00"
-            step="0.10"
-          />
-          <button
-            tabindex="-1"
-            aria-label="Increment value"
-            class="lc-numeric-input__increment"
-            type="button"
-            onclick="incThr()"
-          />
-          <button
-            tabindex="-1"
-            aria-label="Decrement value"
-            class="lc-numeric-input__decrement"
-            type="button"
-            onclick="decThr()"
-          />
-        </div>
-        <br><br>
-        <input type="button" value="Save settings" class="lc-btn lc-btn--primary" onclick="save_settings()">
+        <input type="button" value="Save settings" onclick="save_settings()">
       </form>
     </div>
-      <div class="lc-divider" />
   </div>
 
-  <h3 class="rsg--heading-14 rsg--heading3-17 rsg--sectionName-12" style="font-family:Source Sans Pro,-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Arial,sans-serif">Statistics</h3>
-  <input type="button" value="Reset recent statistics" class="lc-btn lc-btn--primary" onclick="reset_stats()">
   <div>
   <div id="donutchartAll" style="width: 400px; height: 300px; float: left; margin:10px"></div>
   <div id="donutchartRecent" style="width: 400px; height: 300px; float: left; margin:10px"></div>
   </div>
 
-  <!--
-  <a href="" onclick="instance.openPopup()">Sign in with LiveChat</a>
-
-
-  </br>
-
-  <button class="lc-btn lc-btn--primary" type="button" onclick="exchange_code()">
-    <div>Click to exchange code</div>
-  </button>
-
-  </br>
-
-  <button class="lc-btn" type="button" onclick="list_archives()">
-    <div>Get all the archives</div>
-  </button>
-
-  </br>
-
-
-  <button class="lc-btn" type="button" onclick="create_bot()">
-    <div>Create new bot</div>
-  </button>
-
-
-  </br>
-  </br>
-  </br>
-
-
-
-  <div class="lc-text-field">
-    <div class="lc-text-field__label">
-      <label class="lc-field-label" for="input-field-example-1">
-        Input message
-      </label>
-    </div>
-    <div>
-      <input type="text" class="lc-input" value="Input Field text" placeholder="Placeholder..." id="message_text" />
-    </div>
-  </div>
-
-  <button class="lc-btn" type="button" onclick="bot_send_message()">
-    <div>Send Message</div>
-  </button>
-
-
-  </br>
-  </br>
-
-  <div class="lc-text-field">
-    <div class="lc-text-field__label">
-      <label class="lc-field-label" for="input-field-example-1">
-        Input image url
-      </label>
-    </div>
-    <div>
-      <input type="text" class="lc-input" value="Input image url" placeholder="Placeholder..." id="image_url" />
-    </div>
-  </div>
-
-  <button class="lc-btn" type="button" onclick="bot_send_image()">
-    <div>Send Image</div>
-  </button>
--->
-
   <script src="app.js"></script>
-
-  <!-- Start of LiveChat (www.livechatinc.com) code -->
-  <script>
-    window.__lc = window.__lc || {};
-    window.__lc.license =12241785;
-    ; (function (n, t, c) { function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) } var e = { _q: [], _h: null, _v: "2.0", on: function () { i(["on", c.call(arguments)]) }, once: function () { i(["once", c.call(arguments)]) }, off: function () { i(["off", c.call(arguments)]) }, get: function () { if (!e._h) throw new Error("[LiveChatWidget] You can't use getters before load."); return i(["get", c.call(arguments)]) }, call: function () { i(["call", c.call(arguments)]) }, init: function () { var n = t.createElement("script"); n.async = !0, n.type = "text/javascript", n.src = "https://cdn.livechatinc.com/tracking.js", t.head.appendChild(n) } }; !n.__lc.asyncInit && e.init(), n.LiveChatWidget = n.LiveChatWidget || e }(window, document, [].slice))
-  </script>
-  <noscript><a href="https://www.livechatinc.com/chat-with/12241785/" rel="nofollow">Chat with us</a>, powered by <a
-      href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a></noscript>
-  <!-- End of LiveChat code -->
 
 </body>
 
