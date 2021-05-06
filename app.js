@@ -49,6 +49,7 @@ const exchange_code = () => {
  //   {'joy': 0.9853166, 'disgust': 0.00091473624, 'fear': 6.750398e-05, 'shame': 0.00835823, 
  //'anger': 4.433252e-05, 'guilt': 0.005137451, 'sadness': 0.00016111718}
 
+ /*
     data.addRow(['joy', parseInt(stats.joy)]);
     data.addRow(['disgust', parseInt(stats.disgust)]);
     data.addRow(['fear', parseInt(stats.fear)]);
@@ -56,6 +57,15 @@ const exchange_code = () => {
     data.addRow(['anger', parseInt(stats.anger)]);
     data.addRow(['guilt', parseInt(stats.guilt)]);
     data.addRow(['sadness', parseInt(stats.sadness)]);
+    */
+    console.log(stats.joy);
+    data.addRow(['joy', parseFloat(stats.joy)]);
+    data.addRow(['disgust', parseFloat(stats.disgust)]);
+    data.addRow(['fear', parseFloat(stats.fear)]);
+    data.addRow(['shame', parseFloat(stats.shame)]);
+    data.addRow(['anger', parseFloat(stats.anger)]);
+    data.addRow(['guilt', parseFloat(stats.guilt)]);
+    data.addRow(['sadness', parseFloat(stats.sadness)]);
     /*arrayToDataTable([
       ['Task', 'Hours per Day'],
       ['Work',     11],
@@ -100,50 +110,13 @@ const emo_query_1 = () => {
   })
     .then((response) => {
       console.log(response);
-      drawChart("All", response.data)
-      drawChart("Recent", response.data.joy, response.data.disgust)
-    }, (error) => {
-      console.log(error);
-    });
-  ;
-}
-
-const reset_stats = () => {
-  axios({
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    url: 'https://URL',
-    data: {
-      'org': org,
-    }
-  })
-    .then((response) => {
-      console.log(response);
-      drawChart("All", response.data.stats.emo_sums, response.data.stats.messages_analyzed,
-        response.data.stats.start_date)
-      drawChart("Recent", response.data.statsRecent.emo_sums, response.data.statsRecent.messages_analyzed,
-        response.data.statsRecent.start_date)
-    }, (error) => {
-      console.log(error);
-    });
-  ;
-}
-
-// not used
-const list_archives = () => {
-  axios({
-    method: 'post',
-    headers: {
-      'Authorization': devToken,
-      'Content-Type': 'application/json'
-    },
-    url: 'https://api.livechatinc.com/v3.2/agent/action/list_archives',
-    data: {}
-  })
-    .then((response) => {
-      console.log(response);
+      document.getElementById("textOutput").textContent = response.data;
+      //emos = JSON.parse(response.data);
+      //console.log(emos);
+      //console.log(response.data.joy);
+      //drawChart("All", response.data, 1, "ble")
+      //drawChart("Recent", response.data, 1, "ble")
+      //drawChart("Recent", response.data)
     }, (error) => {
       console.log(error);
     });
