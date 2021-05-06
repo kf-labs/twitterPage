@@ -4,9 +4,9 @@
 // emotion statistics
 let token ="";
 let code = "";
-let myAddress = "https://vigorous-torvalds-5f1600.netlify.app";
+let myAddress = "https://XXX.netlify.app";
 
-let cId = "6e8eb2dd76c604cfdb652edb33d111bd";
+let cId = "";
 let org = "";
 
 const instance = AccountsSDK.init({
@@ -37,7 +37,7 @@ const exchange_code = () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: 'https://kflabs.ml:1500/emobot/code',
+    url: 'https://URL',
     data: {
       'grant_type': 'authorization_code',
       'code': code,
@@ -122,7 +122,7 @@ const save_settings = () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: 'https://kflabs.ml:1500/emobot/settings',
+    url: 'https://URL',
     data: {
       'org': org,
       'display_mode': document.getElementById("display_mode").value,
@@ -148,7 +148,7 @@ const reset_stats = () => {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: 'https://kflabs.ml:1500/emobot/reset_stats',
+    url: 'https://URL',
     data: {
       'org': org,
     }
