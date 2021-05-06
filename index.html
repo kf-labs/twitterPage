@@ -25,7 +25,7 @@
       </div>
 
     <div class="settings">
-      <form action="" class="lc-select" >
+      <form action="" >
         <label for="display_mode">Choose detected emotion display mode:</label>
       <select name="display_mode" id="display_mode" class="lc-select">
           <option value="64orb">Memory Orbs</option>
@@ -36,16 +36,9 @@
           <option value="raw">Classifier Output</option>
         </select>
         <br><br>
-        <label for="recipients">Detected emotion visibility in chat:</label>
-      <select name="recipients" id="recipients" class="lc-select">
-          <option value="agents">Agents (default)</option>
-          <option value="all">Agents & Clients</option>
-          <option value="users">Clients</option>
-          <option value="none">Silent Mode (for statistics)</option>
-        </select>
           <input id="textInput" type="text" name="msg" placeholder="Message" />
         <br><br>
-        <input type="button" value="Save settings" onclick="save_settings()">
+        <input type="button" value="Run Classifier 1" onclick="emo_query_1()">
       </form>
     </div>
   </div>

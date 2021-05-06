@@ -107,35 +107,23 @@ const exchange_code = () => {
     chart.draw(data, options);
   }
 
-const incThr = () => {
-      var x= document.getElementById("threshold-input");
-      x.value = Math.min(parseFloat(x.value) + 0.1,1.0).toFixed(2);
-}
-const decThr = () => {
-      var x= document.getElementById("threshold-input");
-      x.value = Math.max(parseFloat(x.value) - 0.1,0.0).toFixed(2);
-}
-
-const save_settings = () => {
+const emo_query1 = () => {
   axios({
     method: 'post',
     headers: {
       'Content-Type': 'application/json'
     },
-    url: 'https://URL',
+    url: 'https://kflabs.ml:1500/twitter/emotion',
     data: {
-      'org': org,
       'display_mode': document.getElementById("display_mode").value,
-      'threshold': document.getElementById("threshold-input").value,
-      'recipients' : document.getElementById("recipients").value
+      'threshold': 0.9,
+      'text': document.getElementById("textInput").value
     }
   })
     .then((response) => {
       console.log(response);
-      drawChart("All", response.data.stats.emo_sums, response.data.stats.messages_analyzed,
-        response.data.stats.start_date)
-      drawChart("Recent", response.data.statsRecent.emo_sums, response.data.statsRecent.messages_analyzed,
-        response.data.statsRecent.start_date)
+      drawChart("All", response.data)
+      drawChart("Recent", response.data.joy, response.data.disgust)
     }, (error) => {
       console.log(error);
     });
