@@ -85,7 +85,7 @@ const exchange_code = () => {
     chart.draw(data, options);
   }
 
-const emo_query1 = () => {
+const emo_query_1 = () => {
   axios({
     method: 'post',
     headers: {
