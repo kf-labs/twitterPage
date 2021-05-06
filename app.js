@@ -9,28 +9,6 @@ let myAddress = "https://XXX.netlify.app";
 let cId = "";
 let org = "";
 
-const instance = AccountsSDK.init({
-  client_id: cId,
-  response_type: "code",
-  prompt: "consent",
-  onIdentityFetched: (error, data) => {
-    if (data) {
-      console.log("User authorized!");
-      console.log("License number: " + data.license);
-      console.log(data);
-      code = data.code;
-
-      document.getElementById("livechat-login-button").style.display = "none";
-      document.querySelector(".authorization").style.display = "none";//.innerHTML = "Authorized!";
-      document.getElementById("livechat-authorization-done").style.display = "block";
-      document.querySelector(".authorization-done").innerHTML =
-        "Signed in as: " + data.entity_id;
-
-      exchange_code();
-    }
-  }
-});
-
 const exchange_code = () => {
   axios({
     method: 'post',
