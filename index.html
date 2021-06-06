@@ -39,11 +39,23 @@
           <input id="textInput" type="text" name="msg" placeholder="Message" />
         <br><br>
         <input type="button" value="Run Classifier 1" onclick="emo_query_1()">
+        <input type="button" value="Run Classifier 2" onclick="emo_query_2()">
+        <br><br>
+          <input id="userHandleInput" type="text" name="msg" placeholder="Twitter
+          Handle" />
+        <input type="button" value="Check Twitter Handle" onclick="user_query()">
       </form>
     </div>
   </div>
 
-        <label id="textOutput"></label>
+  <div class="results"></div>
+  <br />
+  <label id="textOutput"></label>
+  <br /><br />
+  <label id="performance"></label>
+  <br /><br />
+  <label id="performanceServer"></label>
+  </div>
   <div>
   <div id="donutchartAll" style="width: 400px; height: 300px; float: left; margin:10px"></div>
   <div id="donutchartRecent" style="width: 400px; height: 300px; float: left; margin:10px"></div>

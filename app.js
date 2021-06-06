@@ -46,7 +46,7 @@ const exchange_code = () => {
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Emotion');
     data.addColumn('number', 'Count');
- //   {'joy': 0.9853166, 'disgust': 0.00091473624, 'fear': 6.750398e-05, 'shame': 0.00835823, 
+ //   {'joy': 0.9853166, 'disgust': 0.00091473624, 'fear': 6.750398e-05, 'shame': 0.00835823,
  //'anger': 4.433252e-05, 'guilt': 0.005137451, 'sadness': 0.00016111718}
 
  /*
@@ -75,14 +75,14 @@ const exchange_code = () => {
       ['Sleep',    7]
     ]);*/
 
-    var emos = 
+    var emos =
     (parseFloat(stats.joy) +
     parseFloat(stats.disgust) +
     parseFloat(stats.fear) +
     parseFloat(stats.shame) +
     parseFloat(stats.anger) +
     parseFloat(stats.guilt) +
-    parseFloat(stats.sadness))  
+    parseFloat(stats.sadness))
     var tot = parseFloat(total);
     var emoPerc = (emos/tot * 100.0) || 0;
 
@@ -96,6 +96,9 @@ const exchange_code = () => {
   }
 
 const emo_query_1 = () => {
+
+  var t0 = performance.now();
+
   axios({
     method: 'post',
     headers: {
@@ -109,8 +112,78 @@ const emo_query_1 = () => {
     }
   })
     .then((response) => {
+      var t1 = performance.now();
       console.log(response);
-      document.getElementById("textOutput").textContent = response.data;
+      document.getElementById("performance").textContent ="Full query time: " + (t1 - t0) + " ms";
+      document.getElementById("performanceServer").textContent = "Classifier time: " + (response.data.time * 1000.0) + " ms";
+      document.getElementById("textOutput").textContent = response.data.scores;
+      //emos = JSON.parse(response.data);
+      //console.log(emos);
+      //console.log(response.data.joy);
+      //drawChart("All", response.data, 1, "ble")
+      //drawChart("Recent", response.data, 1, "ble")
+      //drawChart("Recent", response.data)
+    }, (error) => {
+      console.log(error);
+    });
+  ;
+}
+const emo_query_2 = () => {
+
+  var t0 = performance.now();
+
+  axios({
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    url: 'https://kflabs.ml:1500/twitter/emotion2',
+    data: {
+      'display_mode': document.getElementById("display_mode").value,
+      'threshold': 0.9,
+      'text': document.getElementById("textInput").value
+    }
+  })
+    .then((response) => {
+      var t1 = performance.now();
+      console.log(response);
+      document.getElementById("performance").textContent ="Full query time: " + (t1 - t0) + " ms";
+      document.getElementById("performanceServer").textContent = "Classifier time: " + (response.data.time * 1000.0) + " ms";
+      document.getElementById("textOutput").textContent = response.data.scores;
+      //emos = JSON.parse(response.data);
+      //console.log(emos);
+      //console.log(response.data.joy);
+      //drawChart("All", response.data, 1, "ble")
+      //drawChart("Recent", response.data, 1, "ble")
+      //drawChart("Recent", response.data)
+    }, (error) => {
+      console.log(error);
+    });
+  ;
+}
+
+const user_query = () => {
+
+  var t0 = performance.now();
+
+  axios({
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    url: 'https://kflabs.ml:1500/twitter/user',
+    data: {
+      'display_mode': document.getElementById("display_mode").value,
+      'threshold': 0.9,
+      'text': document.getElementById("userHandleInput").value
+    }
+  })
+    .then((response) => {
+      var t1 = performance.now();
+      console.log(response);
+      document.getElementById("performance").textContent ="Full query time: " + (t1 - t0) + " ms";
+      document.getElementById("performanceServer").textContent = "Classifier time: " + (response.data.time * 1000.0) + " ms";
+      document.getElementById("textOutput").textContent = response.data.scores;
       //emos = JSON.parse(response.data);
       //console.log(emos);
       //console.log(response.data.joy);
